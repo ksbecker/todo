@@ -8,7 +8,7 @@ AutoMapper is used to map objects from the datasource to the view model.
 
 Dependency Injection is used to make changing to a different datasource easier. Also, testing is much easier with DI.
 
-The frontend is using React with reactstrap.
+The frontend is using React with reactstrap and React Router.
 
 I started with a new React project in Visual Studio using .NET 5. I stripped out most of the example code and began
 by building out the Data Access Layer. Once it was in place, I built the UI. With the UI taking shape I build the

@@ -10,9 +10,10 @@ export class ToggleComplete extends Component {
     }
 
     handleToggleComplete() {
-        var p = this.props;
-        var id = p.id;
-        var completed = p.completed;
+        var props = this.props;
+
+        var id = props.id;
+        var completed = props.completed;
 
         var formData = new FormData();
         formData.append("id", id);
@@ -25,7 +26,7 @@ export class ToggleComplete extends Component {
             })
             .then(response => {
                 if (response.status === 200) {
-                    p.onToggleComplete();
+                    props.onToggleComplete();
                 } else {
                     alert("There was a problem");
                 }
@@ -34,7 +35,7 @@ export class ToggleComplete extends Component {
 
     render() {
         return (
-            <Input type="checkbox" checked={this.props.completed} onClick={this.handleToggleComplete} />
+            <Input type="checkbox" checked={this.props.completed} onChange={this.handleToggleComplete} />
         );
     }
 }
