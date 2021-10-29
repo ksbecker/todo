@@ -78,6 +78,6 @@ export class Home extends Component {
         this.setState({ loading: true });
         const response = await fetch('api/ToDo');
         const data = await response.json();
-        this.setState({ toDos: data.sort((toDo1, toDo2) => toDo1.due - toDo2.due), loading: false });
+        this.setState({ toDos: data.sort((toDo1, toDo2) => Date.parse(toDo1.due) - Date.parse(toDo2.due)), loading: false });
     }
 }
