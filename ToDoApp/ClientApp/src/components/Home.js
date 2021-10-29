@@ -60,8 +60,7 @@ export class Home extends Component {
 
             let completeToDosArray = this.state.toDos
                 .filter(toDo => toDo.completed === true);
-
-            completeToDos = this.renderToDosTable(this.state.toDos.filter(toDo => toDo.completed === true));
+            completeToDos = this.renderToDosTable(completeToDosArray);
         }
 
         return (
