@@ -27,9 +27,21 @@ namespace ToDoApp.ViewModels
             var toDos = toDoService.List();
 
             if (toDos == null)
-                throw new Exception("");
+                return null;
 
             return mapper.Map<IEnumerable<ToDoViewModel>>(toDos);
+        }
+
+        internal static ToDoViewModel Get(int id, IToDoService toDoService, IMapper mapper)
+        {
+            var toDo = toDoService.Get(id);
+
+            if (toDo == null)
+                return null;
+
+            var toDoViewModel = mapper.Map<ToDoViewModel>(toDo);
+
+            return toDoViewModel;
         }
 
         internal bool Add(IToDoService toDoService, IMapper mapper)
@@ -51,6 +63,15 @@ namespace ToDoApp.ViewModels
         internal static bool ToggleComplete(IToDoService toDoService, int id, bool completed)
         {
             toDoService.ToggleCompleted(id, completed);
+
+            return true;
+        }
+
+        internal bool Update(IToDoService toDoService, IMapper mapper)
+        {
+            var toDo = mapper.Map<ToDo>(this);
+
+            toDoService.Update(toDo);
 
             return true;
         }

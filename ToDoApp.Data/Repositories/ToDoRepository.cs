@@ -18,6 +18,7 @@ namespace ToDoApp.Data.Repositories
             try
             {
                 toDo.Updated_Dt = DateTimeOffset.Now;
+                toDo.Created_Dt = DateTimeOffset.Now;
 
                 Context.Add(toDo);
                 Context.SaveChanges();

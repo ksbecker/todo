@@ -22,16 +22,22 @@ namespace ToDoApp.Controllers
         [HttpGet]
         public IEnumerable<ToDoViewModel> Get() => ToDoViewModel.List(_toDoService, _mapper);
 
+        [HttpGet("{id}")]
+        public ToDoViewModel Get(int id) => ToDoViewModel.Get(id, _toDoService, _mapper);
+
         // POST api/values
         [HttpPost]
-        public void Post([FromForm] ToDoViewModel toDoViewModel) => toDoViewModel.Add(_toDoService, _mapper);
+        public bool Post([FromForm] ToDoViewModel toDoViewModel) => toDoViewModel.Add(_toDoService, _mapper);
+
+        [HttpPut]
+        public bool Put([FromForm] ToDoViewModel toDoViewModel) => toDoViewModel.Update(_toDoService, _mapper);
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromForm] bool completed) => ToDoViewModel.ToggleComplete(_toDoService, id, completed);
+        public bool Put(int id, [FromForm] bool completed) => ToDoViewModel.ToggleComplete(_toDoService, id, completed);
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id) => ToDoViewModel.Delete(_toDoService, id);
+        public bool Delete(int id) => ToDoViewModel.Delete(_toDoService, id);
     }
 }
