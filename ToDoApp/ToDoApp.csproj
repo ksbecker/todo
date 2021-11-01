@@ -12,6 +12,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.11" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- Don't publish the SPA source files, but do show them in the project files list -->
@@ -20,6 +21,7 @@
 		<None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
 		<None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
 		<None Remove="ViewModels\" />
+		<None Remove="Microsoft.Extensions.Logging" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\ToDoApp.Data\ToDoApp.Data.csproj">

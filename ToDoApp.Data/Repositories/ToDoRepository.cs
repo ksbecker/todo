@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 using ToDoApp.Data.Models;
 using ToDoApp.Data.Repositories.Interfaces;
 
@@ -7,7 +8,7 @@ namespace ToDoApp.Data.Repositories
 {
     public class ToDoRepository : BaseRepository<ToDo>, IToDoRepository
     {
-        public ToDoRepository(ToDoContext context) : base(context) { }
+        public ToDoRepository(ToDoContext context, ILogger<ToDoRepository> logger) : base(context, logger) { }
 
         public ToDo Create(ToDo toDo)
         {
@@ -25,7 +26,9 @@ namespace ToDoApp.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"There was an error creating the to do: {ex.Message}");
+                Logger.LogError($"There was an error creating the to do: {ex.Message}");
+
+                return null;
             }
         }
 
@@ -36,7 +39,11 @@ namespace ToDoApp.Data.Repositories
                 var toDo = Context.ToDo.Find(id);
 
                 if (toDo == null)
-                    throw new Exception($"While attempting to delete, to do not found. ID: {id}");
+                {
+                    Logger.LogWarning($"While attempting to delete, to do not found. ID: {id}");
+
+                    return false;
+                }
 
                 Context.Remove(toDo);
                 Context.SaveChanges();
@@ -45,7 +52,9 @@ namespace ToDoApp.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error deleting to do: {ex.Message}");
+                Logger.LogError($"Error deleting to do: {ex.Message}");
+
+                return false;
             }
         }
 
@@ -53,11 +62,22 @@ namespace ToDoApp.Data.Repositories
         {
             try
             {
-                return Context.ToDo.Find(id);
+                var toDo = Context.ToDo.Find(id);
+
+                if (toDo == null)
+                {
+                    Logger.LogError("To do not found");
+
+                    return null;
+                }
+
+                return toDo;
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error retrieving to do: {ex.Message}");
+                Logger.LogError($"Error retrieving to do: {ex.Message}");
+
+                return null;
             }
         }
 
@@ -69,7 +89,9 @@ namespace ToDoApp.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error retrieving list of to dos: {ex.Message}");
+                Logger.LogError($"Error retrieving list of to dos: {ex.Message}");
+
+                return null;
             }
         }
 
@@ -83,7 +105,11 @@ namespace ToDoApp.Data.Repositories
                 var toDoFromDB = Context.ToDo.Find(toDo.Id);
 
                 if (toDoFromDB == null)
-                    throw new Exception($"While attempting to update, to do was not found. ID: {toDo.Id}");
+                {
+                    Logger.LogWarning($"While attempting to update, to do was not found. ID: {toDo.Id}");
+
+                    return false;
+                }
 
                 toDo.Updated_Dt = DateTimeOffset.Now;
                 Context.Entry(toDoFromDB).CurrentValues.SetValues(toDo);
@@ -94,7 +120,9 @@ namespace ToDoApp.Data.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Error updating to do: {ex.Message}");
+                Logger.LogError($"Error updating to do: {ex.Message}");
+
+                return false;
             }
         }
     }
