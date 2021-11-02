@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using ToDoApp.Data.Models;
 using ToDoApp.Data.Services.Interfaces;
@@ -11,6 +12,7 @@ namespace ToDoApp.ViewModels
         #region Public Properties
 
         public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime? Due { get; set; }
@@ -48,32 +50,18 @@ namespace ToDoApp.ViewModels
         {
             var newToDo = mapper.Map<ToDo>(this);
 
-            toDoService.Create(newToDo);
-
-            return true;
+            return toDoService.Create(newToDo);
         }
 
-        internal static bool Delete(IToDoService toDoService, int id)
-        {
-            toDoService.Delete(id);
+        internal static bool Delete(IToDoService toDoService, int id) => toDoService.Delete(id);
 
-            return true;
-        }
-
-        internal static bool ToggleComplete(IToDoService toDoService, int id, bool completed)
-        {
-            toDoService.ToggleCompleted(id, completed);
-
-            return true;
-        }
+        internal static bool ToggleComplete(IToDoService toDoService, int id, bool completed) => toDoService.ToggleCompleted(id, completed);
 
         internal bool Update(IToDoService toDoService, IMapper mapper)
         {
             var toDo = mapper.Map<ToDo>(this);
 
-            toDoService.Update(toDo);
-
-            return true;
+            return toDoService.Update(toDo);
         }
 
         #endregion

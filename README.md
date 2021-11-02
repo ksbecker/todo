@@ -20,7 +20,6 @@ controller and view model.
 Future enhancement ideas:
 
 - Add OAuth and allow for multiple users and a level of security
-- Edit to dos
 - Sort to dos
 - Hide completed to dos
 - Make a better confirmation box when deleting to dos

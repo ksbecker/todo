@@ -10,7 +10,7 @@ namespace ToDoApp.Data.Repositories
     {
         public ToDoRepository(ToDoContext context, ILogger<ToDoRepository> logger) : base(context, logger) { }
 
-        public ToDo Create(ToDo toDo)
+        public bool Create(ToDo toDo)
         {
             if (toDo == null)
                 throw new ArgumentNullException(nameof(toDo), "To do cannot be null");
@@ -23,13 +23,13 @@ namespace ToDoApp.Data.Repositories
                 Context.Add(toDo);
                 Context.SaveChanges();
 
-                return toDo;
+                return true;
             }
             catch (Exception ex)
             {
                 Logger.LogError($"There was an error creating the to do: {ex.Message}");
 
-                return null;
+                return false;
             }
         }
 

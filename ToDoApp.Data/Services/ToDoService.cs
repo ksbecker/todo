@@ -11,7 +11,7 @@ namespace ToDoApp.Data.Services
 
         public ToDoService(IToDoRepository toDoRepository) => _toDoRepository = toDoRepository;
 
-        public ToDo Create(ToDo toDo) => _toDoRepository.Create(toDo);
+        public bool Create(ToDo toDo) => _toDoRepository.Create(toDo);
         public bool Delete(int id) => _toDoRepository.Delete(id);
         public ToDo Get(int id) => _toDoRepository.Get(id);
         public IQueryable<ToDo> List() => _toDoRepository.List();
