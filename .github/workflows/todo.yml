@@ -4,7 +4,7 @@ on: [push]
 
 env:
   AZURE_WEBAPP_NAME: kantodo          # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }}      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '5.x'               # set this to the dot net version to use
 
 jobs:
@@ -12,9 +12,6 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Say workspace
-        run: echo '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
-
       # Checkout the repo
       - uses: actions/checkout@main
       
@@ -32,7 +29,6 @@ jobs:
           dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp' 
       
       # Push to Octopus
-      #- uses: actions/checkout@v2
       - name: Install Octopus CLI 🐙
         uses: OctopusDeploy/install-octopus-cli-action@v1.1.10
         with:
