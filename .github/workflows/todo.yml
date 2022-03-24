@@ -43,7 +43,7 @@ jobs:
         with:
           version: latest
       - name: Push a package to Octopus Deploy 🐙
-        uses: OctopusDeploy/push-package-action@v2
+        uses: OctopusDeploy/push-package-action@<version>
         with:
           api_key: ${{ secrets.API_KEY }}
           packages: 'package1,package2'
