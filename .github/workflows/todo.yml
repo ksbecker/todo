@@ -35,6 +35,10 @@ jobs:
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE  }} # Define secret variable in repository settings as per action documentation
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+      
+      # Publish for GitHub/Octopus
+      - name: 🥅 Publish WWW
+        run: dotnet publish $GITHUB_WORKSPACE/Fenton.Website/Fenton.Website.csproj --configuration FolderProfile-winx64 --output $GITHUB_WORKSPACE/distwww --no-restore
 
       # Push to Octopus
       - uses: actions/checkout@v2
@@ -42,6 +46,8 @@ jobs:
         uses: OctopusDeploy/install-octopus-cli-action@v1.1.10
         with:
           version: latest
+      - name: Package up for Octopus 🐙
+        run: octo pack --id="Website" --format="zip" --version="${{ github.run_number }}" --basePath="$GITHUB_WORKSPACE/distwww" --outFolder="$GITHUB_WORKSPACE/distoctopus"
       - name: Push a package to Octopus Deploy 🐙
         uses: OctopusDeploy/push-package-action@v1.1.1
         with:
