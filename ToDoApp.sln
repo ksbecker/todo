@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.810.11
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Data", "ToDoApp.Data\ToDoApp.Data.csproj", "{C66B42E1-2749-481F-A20D-CD0E311AFA27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoApp.Data", "ToDoApp.Data\ToDoApp.Data.csproj", "{C66B42E1-2749-481F-A20D-CD0E311AFA27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp", "ToDoApp\ToDoApp.csproj", "{C3ECE271-7971-4F09-9F61-7A92B1E928A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoApp", "ToDoApp\ToDoApp.csproj", "{C3ECE271-7971-4F09-9F61-7A92B1E928A8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{755CD746-0D22-40A4-A89B-1BADE0D7D168}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\todo.yml = .github\workflows\todo.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
