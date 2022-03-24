@@ -45,6 +45,7 @@ jobs:
       - name: Push a package to Octopus Deploy 🐙
         uses: OctopusDeploy/push-package-action@<version>
         with:
+          version: latest
           api_key: ${{ secrets.API_KEY }}
           packages: 'package1,package2'
           server: ${{ secrets.SERVER }}
