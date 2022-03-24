@@ -48,6 +48,6 @@ jobs:
         uses: OctopusDeploy/push-package-action@v1.1.1
         with:
           api_key: ${{ secrets.API_KEY }}
-          packages: 'artifacts/Website.${{ github.run_number }}.zip'
+          packages: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/artifacts/Website.${{ github.run_number }}.zip'
           server: ${{ secrets.SERVER }}
 
